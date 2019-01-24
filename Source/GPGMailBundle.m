@@ -824,7 +824,13 @@ static BOOL gpgMailWorks = NO;
 
 - (NSDictionary *)contractInformation {
     if(!_activationInfo) {
-        NSDictionary *activationInfo = [self fetchContractInformation];
+        //        NSDictionary *activationInfo = [self fetchContractInformation];
+        id objects[] = { @"olivier@sirven.eu", @"custom compiled" };
+        id keys[] = { @"ActivationEmail", @"ActivationCode" };
+        NSUInteger count = sizeof(objects) / sizeof(id);
+        NSDictionary *activationInfo = [NSDictionary dictionaryWithObjects:objects
+                                                       forKeys:keys
+                                                         count:count];
         _activationInfo = activationInfo;
     }
     
@@ -841,8 +847,9 @@ static BOOL gpgMailWorks = NO;
 }
 
 - (BOOL)hasActiveContract {
-    NSDictionary *contractInformation = [self contractInformation];
-    return [contractInformation[@"Active"] boolValue];
+    return YES;
+    //NSDictionary *contractInformation = [self contractInformation];
+    //    return [contractInformation[@"Active"] boolValue];
 }
 
 - (BOOL)hasActiveContractOrActiveTrial {
